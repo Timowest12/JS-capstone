@@ -7,8 +7,8 @@ const getmovielist = () => {
   .then(data => data.forEach((row) => {
       if (row.image != null) {
           console.log(row)
-          moviesoutput.innerHTML += `<div class='moviecard' data-id='${row.id}'><div class='imgblock'><img class='movieimage' src=${row.image.medium}></div><div class='infoblock'><div class='likesandname'><h3 class='movietitle'>${row.name}</h3><div><span class="material-icons-outlined">
-          favorite_border
+          moviesoutput.innerHTML += `<div class='moviecard' data-id='${row.id}'><div class='imgblock'><img class='movieimage' src=${row.image.medium}></div><div class='infoblock'><div class='likesandname'><h3 class='movietitle'>${row.name}</h3><div> <span class="material-icons">favorite</span>
+          
           </span>6 likes</div></div><div class='commentsandreservations'><button type='button'>comments</button><button type='button'>reservations</button></div></div></div>`;
       }
   }));
