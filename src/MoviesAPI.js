@@ -15,7 +15,7 @@ const getmovielist = () => {
     fetch(moviesurl)
   .then(response => response.json())
   .then(data => data.forEach((row) => {
-      if (row.image != null) {
+      if (row.image != null && row.rating.average != null) {
           moviesoutput.innerHTML += `<div class='moviecard' data-id='${row.id}'><div class='imgblock'><img class='movieimage' src=${row.image.medium}></div><div class='infoblock'><div class='likesandname'><h3 class='movietitle'>${row.name}</h3><div> <span class="material-icons">favorite</span>
           
           </span>6 likes</div></div><div class='commentsandreservations'><button data-id='${row.id}' class='comments' type='button'>comments</button><button type='button'>reservations</button></div></div></div>`;

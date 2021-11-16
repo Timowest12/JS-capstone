@@ -29,7 +29,7 @@ const getmovie = () => {
     fetch(moviesurl)
     .then(response => response.json())
     .then(movies => movies.forEach((movie) => {
-    if(movie.image != null) {
+    if(movie.image != null && movie.rating.average != null) {
         popUpCont.innerHTML
     += `
     <div id="modal-pop-up-${movie.id}" class="modal-pop-up">
@@ -100,9 +100,8 @@ const getComments = async (id) => {
     let index = 0;
   const request = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/comments?item_id=${id}`);
   const comments = await request.json();
-  console.log(comments);
   comments.forEach((comment) => {
-    index++  
+    index++
     addCommentToList(comment, id, index)});
 };
 
