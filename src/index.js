@@ -1,4 +1,4 @@
 import './style.css';
-import { getmovielist, getfromid } from './MoviesAPI.js'
+import { getmovielist, getfromid,openModal } from './MoviesAPI.js'
 
 getmovielist();

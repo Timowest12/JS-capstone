@@ -15,7 +15,13 @@
 body {
   background-color: bisque;
 }
-
+.modal{
+  visibility: hidden;
+  position:absolute;
+  background-color: firebrick;
+  width: 100vw;
+  height: 100vh;
+}
 .hello {
     color: red;
 }
