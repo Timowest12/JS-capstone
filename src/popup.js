@@ -53,7 +53,7 @@ const postComment = async () => {
   })).json();
 };
 
-const addCommentToList = (comment) => {
+const addCommentToList = (userComment) => {
     const list = document.querySelector('.comment-list');
   
     const listItem = document.createElement('li');
@@ -72,7 +72,9 @@ const displayComments = (comments) => {
 const getComments = async () => {
   const request = await fetch(getUrl);
   const comments = await request.json();
+  let index = 0;
+  comments.forEach(() => index++);
   displayComments(comments);
 };
 
-export { getComments, postComments };
+export { getComments, postComment };
