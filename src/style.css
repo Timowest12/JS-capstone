@@ -45,3 +45,20 @@ footer {
   justify-content: center;
   font-size: 25px;
 }
+.showslist{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.moviecard{
+  width: 200px;
+  padding:30px;
+}
+.commentsandreservations{
+  display: flex;
+  flex-direction: column;
+}
+button{
+  padding:5px;
+  border-radius: none;
+}
