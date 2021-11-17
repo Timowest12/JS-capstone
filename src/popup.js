@@ -12,6 +12,7 @@ const postComments = () =>{
         postComment(elem.dataset.id);
         document.getElementById(`username-${elem.dataset.id}`).value = '';
         document.getElementById(`insight-${elem.dataset.id}`).value = '';
+        document.querySelector(`.comment-list-${elem.dataset.id}`).innerHTML = '';
       })
     })
   } 
@@ -80,6 +81,10 @@ const postComment = async (id) => {
     },
     body: JSON.stringify(newComment),
   })).json();
+  newComment => {
+    console.log('Success:', newComment);
+  }
+  getComments(id);
 };
 
 const addCommentToList = (userComment, id, index) => {

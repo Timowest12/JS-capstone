@@ -15,16 +15,13 @@ const updatelikes = async (id) => {
   let data = await response.json();
   data.shift()
   document.querySelectorAll('.likesoutput').forEach((elem) => {
-    console.log(elem.dataset.id)
     let found = data.find(element => element.item_id == elem.dataset.id);
     if (found != undefined) {
-      console.log(found.likes);
       elem.innerHTML = found.likes
     }else{
       elem.innerHTML = 0
     }
   })
-  //console.log(id)
 }
 const postlike = (id) => {
   const data = { item_id: id };
