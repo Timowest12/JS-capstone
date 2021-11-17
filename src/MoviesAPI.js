@@ -47,7 +47,7 @@ const getmovielist = () => {
   .then(response => response.json())
   .then(data => data.forEach((row) => {
       if (row.image != null && row.rating.average != null) {
-          moviesoutput.innerHTML += `<div class='moviecard' data-id='${row.id}'><div class='imgblock'><img class='movieimage' src=${row.image.medium}></div><div class='infoblock'><div class='likesandname'><h3 class='movietitle'>${row.name}</h3><div> <span class="material-icons">favorite</span>
+          moviesoutput.innerHTML += `<div class='moviecard' data-id='${row.id}'><div class='imgblock'><img class='movieimage' src=${row.image.medium}></div><div class='infoblock'><div class='likesandname'><h3 class='movietitle'>${row.name}</h3><div> <span data-id=${row.id} class="material-icons heart">favorite</span>
           
           <span><span data-id='${row.id}' class='likesoutput'>0</span> likes</span></div></div><div class='commentsandreservations'><button data-id='${row.id}' class='comments' type='button'>comments</button><button type='button'>reservations</button></div></div></div>`;
       }
@@ -55,6 +55,9 @@ const getmovielist = () => {
   .then(() => {
     openModal();
     updatelikes();
+    document.querySelectorAll('.heart').forEach((elem) => {
+      elem.addEventListener('click',() => {postlike(elem.dataset.id)})
+    })
   })
 }
 const getfromid = (id) => {
