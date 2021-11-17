@@ -11,7 +11,7 @@ In this project, we build a movie display site, using the TVmazAPI. to get curen
 - Webpack
 
 ## Deployment Link
-https://timowest12.github.io/JS-capstone/dist
+https://timowest12.github.io/JS-capstone/
 
 ## Website Demo
 
