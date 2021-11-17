@@ -40,7 +40,7 @@ fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6
 .then(data => {
   console.log('Success:', data);
 })
-.then(updatelikes())
+.then(getmovielist())
 }
 const getmovielist = () => {
   let counter = 0;
@@ -58,10 +58,11 @@ const getmovielist = () => {
   }))
   .then(() => {
     openModal();
-    updatelikes();
+    
     document.querySelectorAll('.heart').forEach((elem) => {
       elem.addEventListener('click',() => {postlike(elem.dataset.id)})
     })
+    updatelikes();
   })
 }
 const getfromid = (id) => {
