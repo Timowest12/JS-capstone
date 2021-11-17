@@ -126,6 +126,8 @@ button{
   margin-top: 0;
 }
 
+.heart {cursor: pointer;}
+
 .modal-pop-img {
   width: 50%;
   margin-top: 5%;

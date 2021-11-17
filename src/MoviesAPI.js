@@ -40,6 +40,7 @@ fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6
 .then(data => {
   console.log('Success:', data);
 })
+.then(updatelikes())
 }
 const getmovielist = () => {
     //moviesoutput.innerHTML = 'hello';
