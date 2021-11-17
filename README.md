@@ -5,13 +5,13 @@
 In this project, we build a movie display site, using the TVmazAPI. to get curent streaming movies.And using the Microverse involvement API to save data such as likes and comments.
 ## Built With
 
-- Java Script
+- JavaScript
 - HTML
 - CSS
 - Webpack
 
 ## Deployment Link
-https://timowest12.github.io/JS-capstone/
+https://timowest12.github.io/JS-capstone/dist
 
 ## Website Demo
 
