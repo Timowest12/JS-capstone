@@ -1,38 +1,38 @@
-import commentCounter from "./commentCounter";
+import commentCounter from './commentCounter';
 
 const moviesurl = 'https://api.tvmaze.com/schedule/web?date=2020-05-29';
-const body = document.querySelector("body");
-const popUpCont = document.createElement("section");
+const body = document.querySelector('body');
+const popUpCont = document.createElement('section');
 
 body.appendChild(popUpCont);
 popUpCont.classList.add('pop-up');
 
-const postComments = () =>{
-    document.querySelectorAll('.addnew-btn').forEach((elem) => {
-      elem.addEventListener('click',(e) => {
-        e.preventDefault();
-        postComment(elem.dataset.id);
-        document.getElementById(`username-${elem.dataset.id}`).value = '';
-        document.getElementById(`insight-${elem.dataset.id}`).value = '';
-        document.querySelector(`.comment-list-${elem.dataset.id}`).innerHTML = '';
-      })
-    })
-  } 
+const postComments = () => {
+  document.querySelectorAll('.addnew-btn').forEach((elem) => {
+    elem.addEventListener('click', (e) => {
+      e.preventDefault();
+      postComment(elem.dataset.id);
+      document.getElementById(`username-${elem.dataset.id}`).value = '';
+      document.getElementById(`insight-${elem.dataset.id}`).value = '';
+      document.querySelector(`.comment-list-${elem.dataset.id}`).innerHTML = '';
+    });
+  });
+};
 
-  const closeModal = () =>{
-    document.querySelectorAll('.close-button').forEach((elem) => {
-      elem.addEventListener('click',() => {
-        document.querySelector(`#modal-pop-up-${elem.dataset.id}`).classList.remove('active');
-        document.querySelector(`.comment-list-${elem.dataset.id}`).innerHTML = '';
-      })
-    })
-  }
+const closeModal = () => {
+  document.querySelectorAll('.close-button').forEach((elem) => {
+    elem.addEventListener('click', () => {
+      document.querySelector(`#modal-pop-up-${elem.dataset.id}`).classList.remove('active');
+      document.querySelector(`.comment-list-${elem.dataset.id}`).innerHTML = '';
+    });
+  });
+};
 
 const getmovie = () => {
-    fetch(moviesurl)
-    .then(response => response.json())
-    .then(movies => movies.forEach((movie) => {
-    if(movie.image != null && movie.rating.average != null) {
+  fetch(moviesurl)
+    .then((response) => response.json())
+    .then((movies) => movies.forEach((movie) => {
+      if (movie.image != null && movie.rating.average != null) {
         popUpCont.innerHTML
     += `
     <div id="modal-pop-up-${movie.id}" class="modal-pop-up">
@@ -60,54 +60,55 @@ const getmovie = () => {
             </form>
         </div>
     </div>`;
-               }
+      }
     }))
     .then(() => {
-        postComments();
-        closeModal();
-      })
-  };
+      postComments();
+      closeModal();
+    });
+};
 
-    const postUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/comments';
+const postUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/comments';
 const postComment = async (id) => {
   const newComment = {
     item_id: id,
     username: document.getElementById(`username-${id}`).value,
     comment: document.getElementById(`insight-${id}`).value,
   };
-  (await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/comments`, {
+  (await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/comments', {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
-      'Accept': 'application/json'
+      Accept: 'application/json',
     },
     body: JSON.stringify(newComment),
   })).json();
-  newComment => {
+  (newComment) => {
     console.log('Success:', newComment);
-  }
+  };
   getComments(id);
 };
 
 const addCommentToList = (userComment, id) => {
-    const list = document.querySelector(`.comment-list-${id}`);
-  
-    const listItem = document.createElement('li');
-    listItem.classList.add(`list-item-${id}`)
-  
-    listItem.innerHTML = `
+  const list = document.querySelector(`.comment-list-${id}`);
+
+  const listItem = document.createElement('li');
+  listItem.classList.add(`list-item-${id}`);
+
+  listItem.innerHTML = `
           <p>${userComment.creation_date} ${userComment.username} ${userComment.comment}</p>
           `;
-  
-    list.appendChild(listItem);
-  };
+
+  list.appendChild(listItem);
+};
 
 const getComments = async (id) => {
   const request = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/comments?item_id=${id}`);
   const comments = await request.json();
   comments.forEach((comment) => {
-    addCommentToList(comment, id)});
-    commentCounter(id);
+    addCommentToList(comment, id);
+  });
+  commentCounter(id);
 };
 
 export { getComments, postComment, getmovie };

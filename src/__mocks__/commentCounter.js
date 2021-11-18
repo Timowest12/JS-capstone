@@ -15,9 +15,8 @@ const commentCounter = () => {
   if (commentArr) {
     const commenttext = `Comments (${commentArr.length})`;
     return commenttext;
-  } else {
-    return 'Comments (0)';
   }
+  return 'Comments (0)';
 };
 
 export default commentCounter;
