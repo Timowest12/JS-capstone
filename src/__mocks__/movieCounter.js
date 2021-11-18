@@ -18,6 +18,6 @@ const movieCounter = () => {
     } else {
       return '(0)';
     }
-  };//comment
+  };//test
   
   export default movieCounter;
