@@ -1,8 +1,8 @@
 import './style.css';
 import {
-  getmovielist, getfromid, openModal, updatelikes, postlike,
+  getmovielist, openModal, updatelikes, postlike,// eslint-disable-line
 } from './MoviesAPI.js';
-import { getComments, postComment, getmovie } from './popup.js';
+import { getComments, postComment, getmovie } from './popup.js';// eslint-disable-line
 
 getmovielist();
 getmovie();

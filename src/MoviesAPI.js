@@ -1,5 +1,5 @@
 import movieCounter from './movieCounter.js';
-import { getComments, postComment, getmovie } from './popup.js';
+import { getComments, postComment, getmovie } from './popup.js';// eslint-disable-line
 
 const moviesurl = 'https://api.tvmaze.com/schedule/web?date=2020-05-29';
 const moviesoutput = document.querySelector('.showslist');
@@ -17,29 +17,13 @@ const updatelikes = async (id) => {
   const data = await response.json();
   data.shift();
   document.querySelectorAll('.likesoutput').forEach((elem) => {
-    const found = data.find((element) => element.item_id == elem.dataset.id);
-    if (found != undefined) {
+    const found = data.find((element) => element.item_id === elem.dataset.id);
+    if (found !== undefined) {
       elem.innerHTML = found.likes;
     } else {
       elem.innerHTML = 0;
     }
   });
-};
-const postlike = (id) => {
-  const data = { item_id: id };
-
-  fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/likes', {
-    method: 'POST', // or 'PUT'
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('Success:', data);
-    })
-    .then(getmovielist());
 };
 const getmovielist = () => {
   // moviesoutput.innerHTML = 'hello';
@@ -56,15 +40,30 @@ const getmovielist = () => {
       openModal();
 
       document.querySelectorAll('.heart').forEach((elem) => {
-        elem.addEventListener('click', () => { postlike(elem.dataset.id); });
+        elem.addEventListener('click', () => { postlike(elem.dataset.id); });// eslint-disable-line
       });
       updatelikes();
       movieCounter();
     });
 };
-const getfromid = (id) => {
 
+const postlike = (id) => {
+  const data = { item_id: id };
+
+  fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/likes', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+    })
+    .then(getmovielist());
 };
+
 export {
-  getmovielist, getfromid, openModal, updatelikes, postlike,
+  getmovielist, openModal, updatelikes, postlike,
 };

@@ -7,6 +7,45 @@ const popUpCont = document.createElement('section');
 body.appendChild(popUpCont);
 popUpCont.classList.add('pop-up');
 
+const addCommentToList = (userComment, id) => {
+  const list = document.querySelector(`.comment-list-${id}`);
+
+  const listItem = document.createElement('li');
+  listItem.classList.add(`list-item-${id}`);
+
+  listItem.innerHTML = `
+          <p>${userComment.creation_date} ${userComment.username} ${userComment.comment}</p>
+          `;
+
+  list.appendChild(listItem);
+};
+
+const getComments = async (id) => {
+  const request = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/comments?item_id=${id}`);
+  const comments = await request.json();
+  comments.forEach((comment) => {
+    addCommentToList(comment, id);
+  });
+  commentCounter(id);
+};
+
+const postComment = async (id) => {
+  const newComment = {
+    item_id: id,
+    username: document.getElementById(`username-${id}`).value,
+    comment: document.getElementById(`insight-${id}`).value,
+  };
+  (await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/comments', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(newComment),
+  })).json();
+  getComments(id);
+};
+
 const postComments = () => {
   document.querySelectorAll('.addnew-btn').forEach((elem) => {
     elem.addEventListener('click', (e) => {
@@ -66,49 +105,6 @@ const getmovie = () => {
       postComments();
       closeModal();
     });
-};
-
-const postUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/comments';
-const postComment = async (id) => {
-  const newComment = {
-    item_id: id,
-    username: document.getElementById(`username-${id}`).value,
-    comment: document.getElementById(`insight-${id}`).value,
-  };
-  (await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/comments', {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify(newComment),
-  })).json();
-  (newComment) => {
-    console.log('Success:', newComment);
-  };
-  getComments(id);
-};
-
-const addCommentToList = (userComment, id) => {
-  const list = document.querySelector(`.comment-list-${id}`);
-
-  const listItem = document.createElement('li');
-  listItem.classList.add(`list-item-${id}`);
-
-  listItem.innerHTML = `
-          <p>${userComment.creation_date} ${userComment.username} ${userComment.comment}</p>
-          `;
-
-  list.appendChild(listItem);
-};
-
-const getComments = async (id) => {
-  const request = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/comments?item_id=${id}`);
-  const comments = await request.json();
-  comments.forEach((comment) => {
-    addCommentToList(comment, id);
-  });
-  commentCounter(id);
 };
 
 export { getComments, postComment, getmovie };
