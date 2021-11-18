@@ -1,7 +1,7 @@
-*{
-  padding:0;
-  margin:0;
-  border:0;
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
   box-sizing: content-box;
   font-family: 'Assistant', sans-serif;
 }
@@ -11,26 +11,28 @@
   --main-font-color: white;
 }
 
-
 body {
   background-color: bisque;
 }
-.modal{
+
+.modal {
   visibility: hidden;
-  position:absolute;
+  position: absolute;
   background-color: firebrick;
   width: 100vw;
   height: 100vh;
 }
+
 .hello {
-    color: red;
+  color: red;
 }
-.navul{
+
+.navul {
   list-style-type: none;
   background-color: var(--header-bg-color);
   color: var(--main-font-color);
   height: 50px;
-  width:100vw;
+  width: 100vw;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -51,35 +53,42 @@ footer {
   justify-content: center;
   font-size: 25px;
 }
-.container{
+
+.container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.showslist{
+
+.showslist {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-.movietitle{
+
+.movietitle {
   min-height: 80px;
 }
-.moviecard{
+
+.moviecard {
   flex: 1 1 0%;
   min-width: 200px;
-  padding:30px;
+  padding: 30px;
 }
-.commentsandreservations{
+
+.commentsandreservations {
   display: flex;
   flex-direction: column;
 }
-.movieimage{
+
+.movieimage {
   width: 100%;
 }
-button{
-  padding:5px;
-  border-radius: none;
+
+button {
+  padding: 5px;
+  border-radius: 0;
 }
 
 .modal-pop-up {
@@ -119,14 +128,14 @@ button{
   outline: none;
   background: none;
   cursor: pointer;
-  color:black;
+  color: black;
   font-size: 5rem;
   font-weight: bold;
   margin: 3%;
   margin-top: 0;
 }
 
-.heart {cursor: pointer;}
+.heart { cursor: pointer; }
 
 .modal-pop-img {
   width: 50%;
@@ -143,7 +152,7 @@ button{
   justify-content: space-between;
   margin: 2% 0;
   width: 50%;
-  font-style: bold;
+  font-weight: bold;
   font-size: 20px;
 }
 
