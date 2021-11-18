@@ -1,3 +1,4 @@
+import movieCounter from "./movieCounter.js"
 const moviesurl = 'https://api.tvmaze.com/schedule/web?date=2020-05-29';
 const moviesoutput = document.querySelector('.showslist');
 import { getComments, postComment, getmovie } from './popup.js'
@@ -40,7 +41,6 @@ fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6
 .then(getmovielist())
 }
 const getmovielist = () => {
-  let counter = 0;
     //moviesoutput.innerHTML = 'hello';
     fetch(moviesurl)
   .then(response => response.json())
@@ -49,8 +49,6 @@ const getmovielist = () => {
           moviesoutput.innerHTML += `<div class='moviecard' data-id='${row.id}'><div class='imgblock'><img class='movieimage' src=${row.image.medium}></div><div class='infoblock'><div class='likesandname'><h3 class='movietitle'>${row.name}</h3><div> <span data-id=${row.id} class="material-icons heart">favorite</span>
           
           <span><span data-id='${row.id}' class='likesoutput'>0</span> likes</span></div></div><div class='commentsandreservations'><button data-id='${row.id}' class='comments' type='button'>comments</button><button type='button'>reservations</button></div></div></div>`;
-          counter ++
-          document.querySelector('.counter').innerHTML = counter;
       }
   }))
   .then(() => {
@@ -60,6 +58,7 @@ const getmovielist = () => {
       elem.addEventListener('click',() => {postlike(elem.dataset.id)})
     })
     updatelikes();
+    movieCounter();
   })
 }
 const getfromid = (id) => {

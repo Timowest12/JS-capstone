@@ -1,3 +1,5 @@
+import commentCounter from "./commentCounter";
+
 const moviesurl = 'https://api.tvmaze.com/schedule/web?date=2020-05-29';
 const body = document.querySelector("body");
 const popUpCont = document.createElement("section");
@@ -87,27 +89,25 @@ const postComment = async (id) => {
   getComments(id);
 };
 
-const addCommentToList = (userComment, id, index) => {
+const addCommentToList = (userComment, id) => {
     const list = document.querySelector(`.comment-list-${id}`);
-    const commentCounter = document.querySelector(`.comment-${id}`);
   
     const listItem = document.createElement('li');
+    listItem.classList.add(`list-item-${id}`)
   
     listItem.innerHTML = `
           <p>${userComment.creation_date} ${userComment.username} ${userComment.comment}</p>
           `;
-    commentCounter.innerHTML = `Comment (${index})`;
   
     list.appendChild(listItem);
   };
 
 const getComments = async (id) => {
-    let index = 0;
   const request = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/comments?item_id=${id}`);
   const comments = await request.json();
   comments.forEach((comment) => {
-    index++
-    addCommentToList(comment, id, index)});
+    addCommentToList(comment, id)});
+    commentCounter(id);
 };
 
 export { getComments, postComment, getmovie };
