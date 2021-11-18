@@ -1,3 +1,5 @@
+import commentCounter from "./commentCounter";
+
 const moviesurl = 'https://api.tvmaze.com/schedule/web?date=2020-05-29';
 const body = document.querySelector("body");
 const popUpCont = document.createElement("section");
@@ -12,6 +14,7 @@ const postComments = () =>{
         postComment(elem.dataset.id);
         document.getElementById(`username-${elem.dataset.id}`).value = '';
         document.getElementById(`insight-${elem.dataset.id}`).value = '';
+        document.querySelector(`.comment-list-${elem.dataset.id}`).innerHTML = '';
       })
     })
   } 
@@ -80,29 +83,31 @@ const postComment = async (id) => {
     },
     body: JSON.stringify(newComment),
   })).json();
+  newComment => {
+    console.log('Success:', newComment);
+  }
+  getComments(id);
 };
 
-const addCommentToList = (userComment, id, index) => {
+const addCommentToList = (userComment, id) => {
     const list = document.querySelector(`.comment-list-${id}`);
-    const commentCounter = document.querySelector(`.comment-${id}`);
   
     const listItem = document.createElement('li');
+    listItem.classList.add(`list-item-${id}`)
   
     listItem.innerHTML = `
           <p>${userComment.creation_date} ${userComment.username} ${userComment.comment}</p>
           `;
-    commentCounter.innerHTML = `Comment (${index})`;
   
     list.appendChild(listItem);
   };
 
 const getComments = async (id) => {
-    let index = 0;
   const request = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/6osTugMui25VcqKgDEZF/comments?item_id=${id}`);
   const comments = await request.json();
   comments.forEach((comment) => {
-    index++
-    addCommentToList(comment, id, index)});
+    addCommentToList(comment, id)});
+    commentCounter(id);
 };
 
 export { getComments, postComment, getmovie };
