@@ -15,7 +15,7 @@ https://drive.google.com/file/d/1l7_xAVOU4krrD45ojk5GF6btepVYlC1E/view?usp=shari
 - Webpack
 
 ## Deployment Link
-https://timowest12.github.io/JS-capstone/
+https://timowest12.github.io/JS-capstone/dist
 
 ## Website Demo
 
